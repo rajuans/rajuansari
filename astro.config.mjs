@@ -4,7 +4,6 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://rajuans.github.io',
-  base: '/rajuansari',
+  site: 'https://rajuansari.com',
   integrations: [tailwind(), mdx(), sitemap()],
 });
