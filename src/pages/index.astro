@@ -3,15 +3,17 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const cards = [
-  { href: '/blog',          title: 'Blog',          description: 'Thoughts on software, design, and things I\'m figuring out.' },
-  { href: '/experience',    title: 'Experience',    description: 'My professional journey, companies I\'ve worked with, and the tools I use.' },
-  { href: '/press',         title: 'Press',         description: 'Articles, interviews, and podcast appearances.' },
-  { href: '/patents',       title: 'Patents',       description: 'Inventions I\'ve filed and been granted.' },
-  { href: '/publications',  title: 'Publications',  description: 'Research papers and technical writing.' },
-  { href: '/peer-reviews',  title: 'Peer Reviews',  description: 'Conferences and journals I\'ve reviewed for.' },
-  { href: '/education',     title: 'Education',     description: 'Academic background and qualifications.' },
-  { href: '/contact',       title: 'Contact',       description: 'Get in touch — always open to interesting conversations.' },
+  { href: `${base}/blog`,          title: 'Blog',          description: 'Thoughts on software, design, and things I\'m figuring out.' },
+  { href: `${base}/experience`,    title: 'Experience',    description: 'My professional journey, companies I\'ve worked with, and the tools I use.' },
+  { href: `${base}/press`,         title: 'Press',         description: 'Articles, interviews, and podcast appearances.' },
+  { href: `${base}/patents`,       title: 'Patents',       description: 'Inventions I\'ve filed and been granted.' },
+  { href: `${base}/publications`,  title: 'Publications',  description: 'Research papers and technical writing.' },
+  { href: `${base}/peer-reviews`,  title: 'Peer Reviews',  description: 'Conferences and journals I\'ve reviewed for.' },
+  { href: `${base}/education`,     title: 'Education',     description: 'Academic background and qualifications.' },
+  { href: `${base}/contact`,       title: 'Contact',       description: 'Get in touch — always open to interesting conversations.' },
 ];
 ---
 
@@ -58,15 +60,15 @@ const cards = [
 
       <!-- CTAs -->
       <div class="mt-8 flex flex-wrap gap-3">
-        <a href="/experience"
+        <a href={`${base}/experience`}
            class="inline-flex items-center px-4 py-2 bg-[var(--accent)] text-white text-sm font-medium rounded-md hover:bg-[var(--accent-hover)] transition-colors">
           View Experience
         </a>
-        <a href="/contact"
+        <a href={`${base}/contact`}
            class="inline-flex items-center gap-1.5 px-4 py-2 border border-gray-200 dark:border-neutral-700 text-gray-700 dark:text-neutral-300 text-sm font-medium rounded-md hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
           Get in Touch
         </a>
-        <a href="/blog"
+        <a href={`${base}/blog`}
            class="inline-flex items-center gap-1.5 px-4 py-2 border border-gray-200 dark:border-neutral-700 text-gray-700 dark:text-neutral-300 text-sm font-medium rounded-md hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
           Read the Blog
         </a>
