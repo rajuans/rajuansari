@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const patents = [
+  {
+    title: 'Input processing with profile context',
+    number: 'US12573408B1',
+    filed: '2023',
+    granted: '2026',
+    description: 'A speech-processing system may be configured to provide certain endpoints (e.g., skills and/or applications) with data reflecting an explicitly selected user profile. When handling requests from a device configured to support a session context (e.g., a personal device), the skill may handle multiple requests in an interaction (e.g., a “session”) using the selected profile as the session context, even if the system recognizes a different user for one or more of the requests. ',
+    href: 'https://patents.google.com/patent/US12573408B1/en?oq=12573408',
+  },
+];
+---
+
+<Base title="Patents" description="Patents filed and granted to Raju Ansari.">
+  <Nav />
+  <main class="max-w-4xl mx-auto w-full px-6 flex-1 py-12">
+
+    <PageHeader
+      title="Patents"
+      eyebrow="Inventions"
+      count={String(patents.length)}
+      description={`patent${patents.length !== 1 ? 's' : ''} filed or granted`}
+    />
+
+    <div class="space-y-3">
+      {patents.map(patent => (
+        <a
+          href={patent.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="reveal group block p-5 border border-gray-200 dark:border-neutral-800 rounded-lg hover:border-[var(--accent)] transition-colors"
+        >
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 text-xs bg-[var(--accent-dim)] text-[var(--accent)] rounded font-mono">
+              {patent.number}
+            </span>
+            <div class="flex gap-3 text-xs text-gray-400 dark:text-neutral-500 font-mono">
+              <span>Filed {patent.filed}</span>
+              <span>Granted {patent.granted}</span>
+            </div>
+          </div>
+          <h3 class="text-sm font-medium text-gray-900 dark:text-neutral-100 group-hover:text-[var(--accent)] transition-colors mb-3">
+            {patent.title}
+          </h3>
+          <p class="text-sm text-gray-500 dark:text-neutral-400 leading-relaxed mb-4">{patent.description}</p>
+          <span class="text-xs font-medium text-[var(--accent)]">View patent →</span>
+        </a>
+      ))}
+    </div>
+
+  </main>
+  <Footer />
+</Base>

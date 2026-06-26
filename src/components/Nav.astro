@@ -1,0 +1,116 @@
+---
+const links = [
+  { href: '/blog',         label: 'Blog' },
+  { href: '/experience',   label: 'Experience' },
+  { href: '/press',        label: 'Press' },
+  { href: '/patents',      label: 'Patents' },
+  { href: '/publications', label: 'Publications' },
+  { href: '/peer-reviews', label: 'Peer Reviews' },
+  { href: '/education',    label: 'Education' },
+  { href: '/contact',      label: 'Contact' },
+];
+
+const current = Astro.url.pathname;
+---
+
+<nav class="sticky top-0 z-10 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-transparent transition-colors duration-200">
+  <div class="max-w-4xl mx-auto w-full px-6 py-4 flex items-center justify-between gap-4">
+    <a href="/" class="font-semibold text-sm text-gray-900 dark:text-neutral-100 hover:text-gray-500 dark:hover:text-neutral-400 transition-colors shrink-0">
+      Raju Ansari
+    </a>
+
+    <div class="flex items-center gap-1 min-w-0">
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center flex-wrap gap-0.5">
+        {links.map(link => (
+          <a
+            href={link.href}
+            class={`px-2 py-1 text-xs rounded whitespace-nowrap transition-colors ${
+              current.startsWith(link.href)
+                ? 'text-gray-900 dark:text-neutral-100 font-medium'
+                : 'text-gray-500 dark:text-neutral-400 hover:text-gray-900 dark:hover:text-neutral-100'
+            }`}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button
+        id="menu-btn"
+        aria-label="Toggle menu"
+        class="md:hidden p-1.5 rounded-md text-gray-500 dark:text-neutral-400 hover:text-gray-900 dark:hover:text-neutral-100 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors"
+      >
+        <svg id="icon-open" class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+        <svg id="icon-close" class="w-4 h-4 hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+      <!-- Theme toggle -->
+      <button
+        onclick="toggleTheme()"
+        aria-label="Toggle theme"
+        class="p-1.5 rounded-md text-gray-500 dark:text-neutral-400 hover:text-gray-900 dark:hover:text-neutral-100 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors shrink-0"
+      >
+        <svg class="block dark:hidden w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="hidden dark:block w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden hidden border-t border-gray-100 dark:border-neutral-800">
+    <div class="max-w-4xl mx-auto px-6 py-3 grid grid-cols-2 gap-1">
+      {links.map(link => (
+        <a
+          href={link.href}
+          class={`px-2 py-2 text-sm rounded transition-colors ${
+            current.startsWith(link.href)
+              ? 'text-gray-900 dark:text-neutral-100 font-medium'
+              : 'text-gray-500 dark:text-neutral-400 hover:text-gray-900 dark:hover:text-neutral-100'
+          }`}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<script is:inline>
+  var menuBtn = document.getElementById('menu-btn');
+  var mobileMenu = document.getElementById('mobile-menu');
+  var iconOpen = document.getElementById('icon-open');
+  var iconClose = document.getElementById('icon-close');
+
+  menuBtn.addEventListener('click', function () {
+    var isOpen = !mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden', isOpen);
+    iconOpen.classList.toggle('hidden', !isOpen);
+    iconClose.classList.toggle('hidden', isOpen);
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      mobileMenu.classList.add('hidden');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+    });
+  });
+</script>

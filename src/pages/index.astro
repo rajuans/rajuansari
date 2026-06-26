@@ -1,0 +1,120 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const cards = [
+  { href: '/blog',          title: 'Blog',          description: 'Thoughts on software, design, and things I\'m figuring out.' },
+  { href: '/experience',    title: 'Experience',    description: 'My professional journey, companies I\'ve worked with, and the tools I use.' },
+  { href: '/press',         title: 'Press',         description: 'Articles, interviews, and podcast appearances.' },
+  { href: '/patents',       title: 'Patents',       description: 'Inventions I\'ve filed and been granted.' },
+  { href: '/publications',  title: 'Publications',  description: 'Research papers and technical writing.' },
+  { href: '/peer-reviews',  title: 'Peer Reviews',  description: 'Conferences and journals I\'ve reviewed for.' },
+  { href: '/education',     title: 'Education',     description: 'Academic background and qualifications.' },
+  { href: '/contact',       title: 'Contact',       description: 'Get in touch — always open to interesting conversations.' },
+];
+---
+
+<Base>
+  <Nav />
+  <main class="max-w-4xl mx-auto w-full px-6 flex-1">
+
+    <!-- Hero -->
+    <section class="py-16 reveal">
+      <!-- Eyebrow -->
+      <div class="hero-eyebrow">
+        <span class="line"></span>
+        Data &amp; AI Platform Engineer
+      </div>
+
+      <!-- Name + tagline -->
+      <h1 class="text-4xl font-semibold tracking-tight text-gray-900 dark:text-neutral-100 mb-5">
+        Raju Ansari
+        <span class="hero-em text-3xl font-semibold mt-2 leading-tight">
+          Building the infrastructure behind<br>intelligent systems.
+        </span>
+      </h1>
+
+      <!-- Description -->
+      <p class="hero-desc text-lg text-gray-600 dark:text-neutral-400 leading-relaxed max-w-xl">
+        Senior Software Development Engineer at <strong>AWS</strong> with 15+ years of experience
+        architecting enterprise-scale cloud platforms across <strong>Amazon Alexa</strong>,
+        <strong>AWS</strong>, and <strong>Amazon AgentCore</strong>.
+        I design and build foundational AI and data infrastructure — from Alexa's Identity &amp;
+        Personalization system to SageMaker Lakehouse's high-throughput ingestion engine —
+        serving hundreds of millions of users globally. Currently leading the technical charter
+        for <strong>agentic AI services</strong> at AWS, helping developers build intelligent,
+        autonomous AI agents at scale.
+      </p>
+
+      <!-- Credentials -->
+      <div class="credentials">
+        <span>US Patent holder</span>
+        <span class="dot">·</span>
+        <span>Peer reviewed researcher</span>
+        <span class="dot">·</span>
+        <span>IEEE Senior Member</span>
+      </div>
+
+      <!-- CTAs -->
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/experience"
+           class="inline-flex items-center px-4 py-2 bg-[var(--accent)] text-white text-sm font-medium rounded-md hover:bg-[var(--accent-hover)] transition-colors">
+          View Experience
+        </a>
+        <a href="/contact"
+           class="inline-flex items-center gap-1.5 px-4 py-2 border border-gray-200 dark:border-neutral-700 text-gray-700 dark:text-neutral-300 text-sm font-medium rounded-md hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
+          Get in Touch
+        </a>
+        <a href="/blog"
+           class="inline-flex items-center gap-1.5 px-4 py-2 border border-gray-200 dark:border-neutral-700 text-gray-700 dark:text-neutral-300 text-sm font-medium rounded-md hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
+          Read the Blog
+        </a>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="reveal py-8 border-y border-gray-100 dark:border-neutral-800 grid grid-cols-2 sm:grid-cols-4 gap-6 mb-16">
+      <div>
+        <p class="text-3xl font-semibold text-gray-900 dark:text-neutral-100">9</p>
+        <p class="text-sm text-gray-400 dark:text-neutral-500 mt-1">Years at Amazon</p>
+      </div>
+      <div>
+        <p class="text-3xl font-semibold text-gray-900 dark:text-neutral-100">1</p>
+        <p class="text-sm text-gray-400 dark:text-neutral-500 mt-1">US Patents</p>
+      </div>
+      <div>
+        <p class="text-3xl font-semibold text-gray-900 dark:text-neutral-100">100M+</p>
+        <p class="text-sm text-gray-400 dark:text-neutral-500 mt-1">Users served</p>
+      </div>
+      <div>
+        <p class="text-3xl font-semibold text-gray-900 dark:text-neutral-100">1B+</p>
+        <p class="text-sm text-gray-400 dark:text-neutral-500 mt-1">Events / day</p>
+      </div>
+    </section>
+
+    <!-- Discovery cards -->
+    <section class="mb-16">
+      <div class="hero-eyebrow mb-5">
+        <span class="line"></span>
+        Explore
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {cards.map(card => (
+          <a
+            href={card.href}
+            class="reveal group block p-5 border border-gray-200 dark:border-neutral-800 rounded-lg hover:border-[var(--accent)] transition-colors"
+          >
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-medium text-gray-900 dark:text-neutral-100 group-hover:text-[var(--accent)] transition-colors">{card.title}</h3>
+              <span class="text-gray-300 dark:text-neutral-600 group-hover:text-[var(--accent)] transition-colors text-sm">→</span>
+            </div>
+            <p class="text-sm text-gray-500 dark:text-neutral-400 leading-relaxed">{card.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</Base>

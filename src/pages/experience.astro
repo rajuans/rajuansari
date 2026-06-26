@@ -1,0 +1,157 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const jobs = [
+  {
+    company: 'Amazon',
+    location: 'Seattle, WA, USA',
+    role: 'Senior Software Development Engineer',
+    period: 'Apr 2019 — Present',
+    description: 'Architecting enterprise-scale cloud platforms across Amazon Alexa, AWS, and Amazon AgentCore. Designed and built foundational AI and data infrastructure — from Alexa\'s Identity & Personalization system to SageMaker Lakehouse\'s high-throughput ingestion engine — serving hundreds of millions of users globally. Currently leading the technical charter for agentic AI services at AWS, helping developers build intelligent, autonomous AI agents at scale.',
+    tags: ['Java', 'Python', 'AWS', 'Alexa', 'SageMaker', 'AgentCore', 'AI/ML', 'Distributed Systems'],
+  },
+  {
+    company: 'Amazon',
+    location: 'Bengaluru, India',
+    role: 'Software Development Engineer',
+    period: 'Jul 2017 — Apr 2019',
+    description: 'Part of the Transportation Financial Systems team, building and scaling financial infrastructure that powers Amazon\'s global logistics and transportation operations.',
+    tags: ['Java', 'AWS', 'Financial Systems', 'Transportation'],
+  },
+  {
+    company: 'Oracle',
+    location: 'Bengaluru, India',
+    role: 'Principal Member of Technical Staff',
+    period: 'Sept 2015 — Jul 2017',
+    description: 'Increased throughput and service availability by developing a virtual cluster in hybrid cloud data movement. Designed and developed cloud integration services that bridged on-premise and cloud environments at scale.',
+    tags: ['Java', 'Cloud', 'Hybrid Cloud', 'Integration', 'Oracle Cloud'],
+  },
+  {
+    company: 'Markit (S&P Global)',
+    location: 'Noida, India',
+    role: 'Senior Software Developer',
+    period: 'Aug 2012 — Aug 2015',
+    description: 'Decreased index launch time by 60% by developing an index lifecycle management framework and pricing engine. Saved Bloomberg terminal licensing costs by building a BBG Per Security Feed ingestion system for financial data workflows.',
+    tags: ['Java', 'Financial Data', 'Pricing Engine', 'Bloomberg', 'Index Management'],
+  },
+  {
+    company: 'National Informatics Center',
+    location: 'Delhi, India',
+    role: 'Scientific Officer',
+    period: 'Dec 2009 — Aug 2012',
+    description: 'Improved developer productivity and security posture across government systems by building a common library addressing web security vulnerabilities. Improved citizen experiences through a Service Level Agreement system tracking the full lifecycle of Delhi government services.',
+    tags: ['Java', 'Web Security', 'Government', 'SLA Systems'],
+  },
+  {
+    company: 'Indus Valley Partners',
+    location: 'Delhi, India',
+    role: 'Software Engineer',
+    period: 'Jun 2007 — Dec 2009',
+    description: 'Designed and delivered components of the Security Lending Platform, Financial Risk Models, and Trading Systems for hedge funds and investment banks.',
+    tags: ['Java', 'Financial Systems', 'Trading', 'Risk Models', 'Hedge Funds'],
+  },
+];
+
+const skillCategories = [
+  {
+    name: 'Languages',
+    skills: ['Core Java', 'Scala', 'Python', 'TypeScript', 'Shell Script'],
+  },
+  {
+    name: 'Data & Big Data',
+    skills: ['Apache Spark', 'Apache Iceberg', 'Data Ingestion', 'Data Integration', 'DynamoDB', 'Redis', 'SQL Server', 'Oracle'],
+  },
+  {
+    name: 'Cloud & Distributed',
+    skills: ['Cloud Computing', 'AWS', 'SQS', 'Distributed Systems', 'Distributed Computing', 'Caching', 'Bigdata'],
+  },
+  {
+    name: 'AI & Identity',
+    skills: ['Machine Learning', 'Model Training', 'ML-powered Personalization', 'Alexa Skill Kit', 'User Recognition', 'Zero Trust System', 'Authentication', 'Authorization'],
+  },
+  {
+    name: 'APIs & Integration',
+    skills: ['RESTful Web Services', 'SOAP', 'SOA', 'Application Integration', 'java-rx', 'java-ws', 'Asynchronous System Design'],
+  },
+  {
+    name: 'Engineering Practices',
+    skills: ['TDD', 'Design Patterns', 'Multithreading', 'Data Structures & Algorithms', 'Agile', 'Backend Development'],
+  },
+  {
+    name: 'Agentic AI Development',
+    skills: ['Agent Development', 'Multi-Agent Systems', 'Agentic Loops', 'Tool & Function Calling', 'MCP (Model Context Protocol)', 'LLM Integration', 'Prompt Engineering', 'RAG', 'SOP Automation', 'AI Workflow Automation', 'Amazon Bedrock', 'Amazon AgentCore', 'Claude SDK'],
+  },
+  {
+    name: 'Tools',
+    skills: ['GIT', 'Maven', 'JUnit', 'Postman', 'IntelliJ', 'Eclipse'],
+  },
+];
+---
+
+<Base title="Experience" description="Professional experience and skills of Raju Ansari.">
+  <Nav />
+  <main class="max-w-4xl mx-auto w-full px-6 flex-1 py-12">
+
+    <PageHeader
+      title="Experience"
+      eyebrow="Career"
+      description="Companies I've worked with and problems I've helped solve."
+    />
+
+    <div class="space-y-3 mb-16">
+      {jobs.map(job => (
+        <div class="reveal p-5 border border-gray-200 dark:border-neutral-800 rounded-lg">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <h2 class="font-medium text-gray-900 dark:text-neutral-100">{job.role}</h2>
+              <p class="text-sm text-gray-500 dark:text-neutral-400">
+                {job.company}
+                <span class="text-gray-300 dark:text-neutral-700 mx-1">·</span>
+                {job.location}
+              </p>
+            </div>
+            <span class="text-xs text-[var(--accent)] font-mono shrink-0 ml-4 mt-0.5 whitespace-nowrap">{job.period}</span>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-neutral-400 leading-relaxed mb-3">{job.description}</p>
+          <div class="flex flex-wrap gap-1.5">
+            {job.tags.map(tag => (
+              <span class="px-2 py-0.5 text-xs bg-[var(--accent-dim)] text-[var(--accent)] rounded font-mono">{tag}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Skills -->
+    <div class="reveal border-t border-gray-100 dark:border-neutral-800 pt-12">
+      <div class="hero-eyebrow mb-6">
+        <span class="line"></span>
+        Skills
+      </div>
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-neutral-100 mb-2">Technologies &amp; Tools</h2>
+      <p class="text-gray-500 dark:text-neutral-400 mb-8">What I work with day to day.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {skillCategories.map(cat => (
+          <div class="reveal p-5 border border-gray-200 dark:border-neutral-800 rounded-lg">
+            <h3 class="text-xs font-medium text-[var(--accent)] uppercase tracking-widest font-mono mb-4">
+              {cat.name}
+            </h3>
+            <div class="flex flex-wrap gap-1.5">
+              {cat.skills.map(skill => (
+                <span class="px-2.5 py-1 text-xs border border-gray-200 dark:border-neutral-700 text-gray-600 dark:text-neutral-300 rounded-md hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </main>
+  <Footer />
+</Base>

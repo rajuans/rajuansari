@@ -1,0 +1,60 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  slug: string;
+  external?: boolean;
+  externalHref?: string;
+  source?: string;
+}
+
+const { title, description, date, slug, external = false, externalHref, source } = Astro.props;
+
+const href = external && externalHref ? externalHref : `/blog/${slug}`;
+const isExternal = external && !!externalHref;
+
+const formatted = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+
+const sourceColors: Record<string, string> = {
+  AWS:        'bg-[#FF9900]/10 text-[#FF9900]',
+  HackerNoon: 'bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400',
+  DZone:      'bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400',
+};
+const sourceBadgeClass = source ? (sourceColors[source] ?? 'bg-[var(--accent-dim)] text-[var(--accent)]') : '';
+---
+
+<a
+  href={href}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener noreferrer' : undefined}
+  class="reveal group block py-5 border-b border-gray-100 dark:border-neutral-800 last:border-0"
+>
+  <div class="flex items-start justify-between gap-4">
+    <div class="min-w-0">
+      <div class="flex items-center gap-2 mb-1 flex-wrap">
+        {source && (
+          <span class={`px-2 py-0.5 text-xs rounded font-mono shrink-0 ${sourceBadgeClass}`}>
+            {source}
+          </span>
+        )}
+        <h3 class="font-medium text-gray-900 dark:text-neutral-100 group-hover:text-[var(--accent)] transition-colors leading-snug">
+          {title}
+        </h3>
+      </div>
+      <p class="text-sm text-gray-500 dark:text-neutral-400 leading-relaxed">{description}</p>
+    </div>
+    <div class="flex flex-col items-end gap-2 shrink-0">
+      <time class="text-xs text-gray-400 dark:text-neutral-500 whitespace-nowrap">{formatted}</time>
+      {isExternal && (
+        <svg class="text-gray-300 dark:text-neutral-600 group-hover:text-[var(--accent)] transition-colors" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+        </svg>
+      )}
+    </div>
+  </div>
+</a>

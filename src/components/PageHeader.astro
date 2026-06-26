@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  eyebrow?: string;
+  count?: string;
+}
+const { title, description, eyebrow, count } = Astro.props;
+---
+
+<div class="reveal mb-12">
+  <div class="hero-eyebrow mb-4">
+    <span class="line"></span>
+    {eyebrow ?? title}
+  </div>
+  <h1 class="text-2xl font-semibold text-gray-900 dark:text-neutral-100 mb-2">{title}</h1>
+  {(description || count) && (
+    <p class="text-gray-500 dark:text-neutral-400">
+      {count && <span class="text-[var(--accent)] font-medium">{count} </span>}
+      {description}
+    </p>
+  )}
+</div>

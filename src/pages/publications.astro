@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const publications = [
+  {
+    title: 'Under Review',
+    authors: 'Ansari, R., et al.',
+    venue: 'To be announced',
+    year: '2026',
+    abstract: 'A paper currently under peer review. Details will be shared upon acceptance.',
+    href: null,
+    tags: [],
+    comingSoon: true,
+  },
+];
+---
+
+<Base title="Publications" description="Research publications and papers by Raju Ansari.">
+  <Nav />
+  <main class="max-w-4xl mx-auto w-full px-6 flex-1 py-12">
+
+    <PageHeader
+      title="Publications"
+      eyebrow="Research"
+      count={String(publications.length)}
+      description={`publication${publications.length !== 1 ? 's' : ''}`}
+    />
+
+    <div class="space-y-3">
+      {publications.map(pub => (
+        pub.comingSoon ? (
+          <div class="reveal p-5 border border-dashed border-[var(--accent)] rounded-lg bg-[var(--accent-dim)]">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs text-gray-400 dark:text-neutral-500 font-mono">{pub.venue} · {pub.year}</span>
+              <span class="px-2 py-0.5 text-xs bg-[var(--accent)] text-white rounded font-mono tracking-wide">
+                Under Review
+              </span>
+            </div>
+            <h3 class="text-sm font-medium text-[var(--accent)] mb-1">{pub.title}</h3>
+            <p class="text-xs text-gray-400 dark:text-neutral-500 mb-3">{pub.authors}</p>
+            <p class="text-sm text-gray-500 dark:text-neutral-400 leading-relaxed">{pub.abstract}</p>
+          </div>
+        ) : (
+          <a
+            href={pub.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="reveal group block p-5 border border-gray-200 dark:border-neutral-800 rounded-lg hover:border-[var(--accent)] transition-colors"
+          >
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs text-gray-400 dark:text-neutral-500 font-mono">{pub.venue} · {pub.year}</span>
+              <div class="flex flex-wrap gap-1.5">
+                {pub.tags.map(tag => (
+                  <span class="px-2 py-0.5 text-xs bg-[var(--accent-dim)] text-[var(--accent)] rounded font-mono">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <h3 class="text-sm font-medium text-gray-900 dark:text-neutral-100 group-hover:text-[var(--accent)] transition-colors mb-1">
+              {pub.title}
+            </h3>
+            <p class="text-xs text-gray-400 dark:text-neutral-500 mb-3">{pub.authors}</p>
+            <p class="text-sm text-gray-500 dark:text-neutral-400 leading-relaxed mb-4">{pub.abstract}</p>
+            <span class="text-xs font-medium text-[var(--accent)]">Read paper →</span>
+          </a>
+        )
+      ))}
+    </div>
+
+  </main>
+  <Footer />
+</Base>

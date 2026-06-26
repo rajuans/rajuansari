@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  html {
+    font-feature-settings: 'cv11', 'ss01', 'cv01', 'cv02';
+    font-optical-sizing: auto;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ── Theme tokens ───────────────────────────── */
+  :root {
+    --border:       #e5e7eb;
+    --accent:       #2d5f4f;
+    --accent-hover: #1a3d31;
+    --accent-dim:   rgba(45, 95, 79, 0.07);
+    --violet:       #6c5ce7;
+    --amber:        #b87333;
+    --text:         #111827;
+    --text-muted:   #6b7280;
+  }
+
+  [data-theme='dark'] {
+    --border:       #262626;
+    --accent:       #b8725c;
+    --accent-hover: #7ccdb4;
+    --accent-dim:   rgba(92, 184, 156, 0.10);
+    --violet:       #9b8afb;
+    --amber:        #d4955a;
+    --text:         #f5f5f5;
+    --text-muted:   #a3a3a3;
+  }
+
+  /* ── Selection ──────────────────────────────── */
+  ::selection {
+    background-color: var(--accent-dim);
+  }
+
+  /* ── Dark mode prose tweaks ─────────────────── */
+  [data-theme='dark'] .prose code:not(pre code) {
+    background-color: rgb(255 255 255 / 0.06);
+    border-color: rgb(255 255 255 / 0.1);
+    color: theme('colors.neutral.200');
+  }
+  [data-theme='dark'] .prose pre  { border-color: rgb(255 255 255 / 0.08); }
+  [data-theme='dark'] .prose h2   { border-bottom-color: theme('colors.neutral.800'); }
+  [data-theme='dark'] .prose blockquote {
+    border-left-color: theme('colors.neutral.700');
+    color: theme('colors.neutral.400');
+  }
+}
+
+@layer components {
+  /* ── Gradient top stripe ────────────────────── */
+  .page-stripe {
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--violet), var(--amber));
+  }
+
+  /* ── Hero eyebrow ───────────────────────────── */
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-eyebrow .line {
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.4;
+    flex-shrink: 0;
+  }
+
+  /* ── Hero em (tagline) ──────────────────────── */
+  .hero-em {
+    display: block;
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  /* ── Hero description strongs ───────────────── */
+  .hero-desc strong {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* ── Credentials row ────────────────────────── */
+  .credentials {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 0.75rem;
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .credentials .dot {
+    opacity: 0.3;
+  }
+}
+
+@layer utilities {
+  /* ── Scroll reveal ──────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
